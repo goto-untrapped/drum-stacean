@@ -8,3 +8,9 @@ edition = "2021"
 [dependencies]
 piston_window = "0.127.0"
 piston2d-opengl_graphics = "0.82.0"
+piston-music = "0.26.0"
+
+[dependencies.sdl2]
+version = "0.34"
+default-features = false
+features = ["mixer"]

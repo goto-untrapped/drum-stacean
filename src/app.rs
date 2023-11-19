@@ -39,7 +39,7 @@ impl App {
             Image::new()
                 .draw(self.pic_drum.iter().next().unwrap(),
                     &DrawState::default(),
-                    c.trans(10.0, 10.0).transform,
+                    c.trans(0.0, 0.0).transform,
                     gl);            
         });
 

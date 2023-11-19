@@ -1,16 +1,39 @@
 use piston_window::*;
-
 mod app;
+
+#[derive(Copy, Clone, Hash, PartialEq, Eq)]
+enum Music {
+    Piano,
+}
+
+#[derive(Copy, Clone, Hash, PartialEq, Eq)]
+enum Sound {
+    Ding,
+}
 
 fn main() {
     use opengl_graphics::GlGraphics;
-    let (width, height) = (400, 300);
+    let (width, height) = (895, 700);
     // initialize window
     let mut window: PistonWindow = 
-        WindowSettings::new("DrumStacean" , [width, height])
+        WindowSettings::new("drum-stacean" , [width, height])
             .exit_on_esc(true)
             .build()
             .unwrap_or_else(|e| { panic!("Failed to build PistonWindow: {}", e) });
+
+    // test music library
+    music::start::<Music, Sound, _>(16, || {
+        music::bind_sound_file(Sound::Ding, "bin/assets/ding.mp3");
+
+        music::set_volume(music::MAX_VOLUME);
+        // music::play_music(&Music::Piano, music::Repeat::Forever);
+        music::play_sound(&Sound::Ding, music::Repeat::Times(1), music::MAX_VOLUME);
+        while let Some(e) = window.next() {
+            window.draw_2d(&e, |_c, g, _device| {
+                clear([1.0; 4], g);
+            });
+        }
+    });
 
     let mut app = app::App::new();
 
