@@ -2,9 +2,7 @@ use piston_window::*;
 mod app;
 
 #[derive(Copy, Clone, Hash, PartialEq, Eq)]
-enum Music {
-    Piano,
-}
+enum Music {}
 
 #[derive(Copy, Clone, Hash, PartialEq, Eq)]
 enum Sound {
@@ -22,18 +20,18 @@ fn main() {
             .unwrap_or_else(|e| { panic!("Failed to build PistonWindow: {}", e) });
 
     // test music library
-    music::start::<Music, Sound, _>(16, || {
-        music::bind_sound_file(Sound::Ding, "bin/assets/ding.mp3");
-
-        music::set_volume(music::MAX_VOLUME);
-        // music::play_music(&Music::Piano, music::Repeat::Forever);
-        music::play_sound(&Sound::Ding, music::Repeat::Times(1), music::MAX_VOLUME);
-        while let Some(e) = window.next() {
-            window.draw_2d(&e, |_c, g, _device| {
-                clear([1.0; 4], g);
-            });
-        }
-    });
+    // music::start::<Music, Sound, _>(16, || {
+    //     music::bind_sound_file(Sound::Ding, "bin/assets/ding.mp3");
+ 
+    //     music::set_volume(music::MAX_VOLUME);
+    //     // music::play_music(&Music::Piano, music::Repeat::Forever);
+    //     music::play_sound(&Sound::Ding, music::Repeat::Times(1), music::MAX_VOLUME);
+    //     while let Some(e) = window.next() {
+    //         // window.draw_2d(&e, |_c, g, _device| {
+    //         //     clear([1.0; 4], g);
+    //         // });
+    //     }
+    // });
 
     let mut app = app::App::new();
 
@@ -42,21 +40,37 @@ fn main() {
 
     let mut gl = GlGraphics::new(OpenGL::V3_2);
 
-    while let Some(e) = window.next() {
-        // update related to graphic
-        if let Some(ref args) = e.render_args() {
-            app.render(args, &mut gl);
-        }
+    // test music library
+    music::start::<Music, Sound, _>(16, || {
 
-        //update related to variable
-        if let Some(ref args) = e.update_args() {
-            app.update(args);
-        }
+        while let Some(e) = window.next() {
+            // update related to graphic
+            if let Some(ref args) = e.render_args() {
+                app.render(args, &mut gl);
+            }
 
-        // keyboard input
-        if let Some(ref args) = e.press_args() {
-            app.key_press(args);
+            //update related to variable
+            if let Some(ref args) = e.update_args() {
+                app.update(args);
+            }
+
+            // keyboard input
+            if let Some(ref args) = e.press_args() {
+                use piston_window::Button::Keyboard;
+
+                // app.key_press(args);
+                if *args == Keyboard(Key::Space) {
+                    make_sound(Sound::Ding, "bin/assets/ding.mp3");
+                }
+            }
         }
+    });
+
+
+    fn make_sound(sound_type: Sound, file_name: &str) {
+        music::bind_sound_file(sound_type, file_name);
+        music::set_volume(music::MAX_VOLUME);
+        music::play_sound(&sound_type, music::Repeat::Times(0), music::MAX_VOLUME);
     }
 
 }

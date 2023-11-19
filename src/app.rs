@@ -3,6 +3,16 @@ use piston_window::*;
 
 use opengl_graphics::{GlGraphics, Texture as GlTexture};
 
+#[derive(Copy, Clone, Hash, PartialEq, Eq)]
+enum Music {
+    Piano,
+}
+
+#[derive(Copy, Clone, Hash, PartialEq, Eq)]
+enum Sound {
+    Ding,
+}
+
 pub struct App {
     pic_drum: Option<GlTexture>,
 }
