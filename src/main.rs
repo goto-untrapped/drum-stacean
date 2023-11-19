@@ -6,7 +6,14 @@ enum Music {}
 
 #[derive(Copy, Clone, Hash, PartialEq, Eq)]
 enum Sound {
-    Ding,
+    BassDrum,
+    SnareDrum,
+    HiHat,
+    FloorTom,
+    HighTom,
+    MediumTom,
+    RideCymbal,
+    CrashCymbal
 }
 
 fn main() {
@@ -19,28 +26,13 @@ fn main() {
             .build()
             .unwrap_or_else(|e| { panic!("Failed to build PistonWindow: {}", e) });
 
-    // test music library
-    // music::start::<Music, Sound, _>(16, || {
-    //     music::bind_sound_file(Sound::Ding, "bin/assets/ding.mp3");
- 
-    //     music::set_volume(music::MAX_VOLUME);
-    //     // music::play_music(&Music::Piano, music::Repeat::Forever);
-    //     music::play_sound(&Sound::Ding, music::Repeat::Times(1), music::MAX_VOLUME);
-    //     while let Some(e) = window.next() {
-    //         // window.draw_2d(&e, |_c, g, _device| {
-    //         //     clear([1.0; 4], g);
-    //         // });
-    //     }
-    // });
-
     let mut app = app::App::new();
 
-    // load assets
+    // load image
     app.load();
 
     let mut gl = GlGraphics::new(OpenGL::V3_2);
 
-    // test music library
     music::start::<Music, Sound, _>(16, || {
 
         while let Some(e) = window.next() {
@@ -57,15 +49,52 @@ fn main() {
             // keyboard input
             if let Some(ref args) = e.press_args() {
                 use piston_window::Button::Keyboard;
-
                 // app.key_press(args);
+
+                // Bass Drum
                 if *args == Keyboard(Key::Space) {
-                    make_sound(Sound::Ding, "bin/assets/ding.mp3");
+                    println!("I'm BassDrum!");
+                    make_sound(Sound::BassDrum, "bin/assets/bass-drum.mp3");
+                }
+                // Snare
+                if *args == Keyboard(Key::F) || *args == Keyboard(Key::J) {
+                    println!("I'm Snare!");
+                    make_sound(Sound::SnareDrum, "bin/assets/snare-drum.mp3");
+                }
+                // HiHat Open
+                if *args == Keyboard(Key::D) || *args == Keyboard(Key::K) {
+                    println!("I'm Hihat!");
+                    make_sound(Sound::HiHat, "bin/assets/hi-hat.mp3");
+                }
+                // HiHat Close
+                // High Tom right side one
+                if *args == Keyboard(Key::S) {
+                    println!("I'm High Tom!");
+                    make_sound(Sound::HighTom, "bin/assets/high-tom.mp3");
+                }
+                // Medium Tom left side one
+                if *args == Keyboard(Key::L) {
+                    println!("I'm Medium Tom!");
+                    make_sound(Sound::MediumTom, "bin/assets/medium-tom.mp3");
+                }
+                // Floor Tom
+                if *args == Keyboard(Key::Semicolon) {
+                    println!("I'm Floor Tom!");
+                    make_sound(Sound::FloorTom, "bin/assets/floor-tom.mp3");
+                }
+                // Ride Cymbal
+                if *args == Keyboard(Key::Unknown) {
+                    println!("I'm Ride Cymbal!");
+                    make_sound(Sound::RideCymbal, "bin/assets/ride-cymbal.mp3");
+                }
+                // Crash Cymbal left up side one
+                if *args == Keyboard(Key::A) {
+                    println!("I'm Crash Cymbal!");
+                    make_sound(Sound::CrashCymbal, "bin/assets/crash-cymbal.mp3");
                 }
             }
         }
     });
-
 
     fn make_sound(sound_type: Sound, file_name: &str) {
         music::bind_sound_file(sound_type, file_name);
