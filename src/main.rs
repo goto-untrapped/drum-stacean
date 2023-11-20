@@ -1,11 +1,12 @@
 use piston_window::*;
 mod app;
+mod effect_font;
 
 #[derive(Copy, Clone, Hash, PartialEq, Eq)]
 enum Music {}
 
 #[derive(Copy, Clone, Hash, PartialEq, Eq)]
-enum Sound {
+pub enum Sound {
     BassDrum,
     SnareDrum,
     HiHat,
@@ -21,7 +22,7 @@ fn main() {
     let (width, height) = (895, 700);
     // initialize window
     let mut window: PistonWindow = 
-        WindowSettings::new("drum-stacean" , [width, height])
+        WindowSettings::new("drum_stacean" , [width, height])
             .exit_on_esc(true)
             .build()
             .unwrap_or_else(|e| { panic!("Failed to build PistonWindow: {}", e) });
@@ -41,7 +42,7 @@ fn main() {
                 app.render(args, &mut gl);
             }
 
-            //update related to variable
+            // update related to variable
             if let Some(ref args) = e.update_args() {
                 app.update(args);
             }
@@ -54,43 +55,44 @@ fn main() {
                 // Bass Drum
                 if *args == Keyboard(Key::Space) {
                     println!("I'm BassDrum!");
-                    make_sound(Sound::BassDrum, "bin/assets/bass-drum.mp3");
+                    make_sound(Sound::BassDrum, "bin/assets/bass_drum.mp3");
+                    app.add(&Sound::BassDrum);
                 }
                 // Snare
                 if *args == Keyboard(Key::F) || *args == Keyboard(Key::J) {
                     println!("I'm Snare!");
-                    make_sound(Sound::SnareDrum, "bin/assets/snare-drum.mp3");
+                    make_sound(Sound::SnareDrum, "bin/assets/snare_drum.mp3");
                 }
                 // HiHat Open
                 if *args == Keyboard(Key::D) || *args == Keyboard(Key::K) {
                     println!("I'm Hihat!");
-                    make_sound(Sound::HiHat, "bin/assets/hi-hat.mp3");
+                    make_sound(Sound::HiHat, "bin/assets/hi_hat.mp3");
                 }
                 // HiHat Close
                 // High Tom right side one
                 if *args == Keyboard(Key::S) {
                     println!("I'm High Tom!");
-                    make_sound(Sound::HighTom, "bin/assets/high-tom.mp3");
+                    make_sound(Sound::HighTom, "bin/assets/high_tom.mp3");
                 }
                 // Medium Tom left side one
                 if *args == Keyboard(Key::L) {
                     println!("I'm Medium Tom!");
-                    make_sound(Sound::MediumTom, "bin/assets/medium-tom.mp3");
+                    make_sound(Sound::MediumTom, "bin/assets/medium_tom.mp3");
                 }
                 // Floor Tom
                 if *args == Keyboard(Key::Semicolon) {
                     println!("I'm Floor Tom!");
-                    make_sound(Sound::FloorTom, "bin/assets/floor-tom.mp3");
+                    make_sound(Sound::FloorTom, "bin/assets/floor_tom.mp3");
                 }
                 // Ride Cymbal
                 if *args == Keyboard(Key::Unknown) {
                     println!("I'm Ride Cymbal!");
-                    make_sound(Sound::RideCymbal, "bin/assets/ride-cymbal.mp3");
+                    make_sound(Sound::RideCymbal, "bin/assets/ride_cymbal.mp3");
                 }
                 // Crash Cymbal left up side one
                 if *args == Keyboard(Key::A) {
                     println!("I'm Crash Cymbal!");
-                    make_sound(Sound::CrashCymbal, "bin/assets/crash-cymbal.mp3");
+                    make_sound(Sound::CrashCymbal, "bin/assets/crash_cymbal.mp3");
                 }
             }
         }
