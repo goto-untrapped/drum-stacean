@@ -2,16 +2,15 @@ use opengl_graphics::{GlGraphics, Texture as GlTexture};
 use piston_window::{Image, DrawState, Context};
 
 use crate::Sound;
-
-struct EffectFont {
-    x: i32,
-    y: i32,
-    status: Sound,
-    effect: Option<GlTexture>,
+#[derive(Debug)]
+pub struct EffectFont {
+    pub x: f64,
+    pub y: f64,
+    pub status: Sound,
 }
 
 pub struct EffectFonts {
-    fonts: Vec<EffectFont>,
+    pub fonts: Vec<EffectFont>,
 }
 
 impl EffectFonts {
@@ -22,15 +21,14 @@ impl EffectFonts {
         effect_fonts
     }
 
-    pub fn add(&mut self, sound_type: &Sound, effect: Option<GlTexture>) {
+    pub fn add(&mut self, sound_type: &Sound) {
         // when key press, add pressed sound to vec
         match sound_type {
             Sound::BassDrum => {
                 let effect_font = EffectFont {
-                    x: 200,
-                    y: 100,
+                    x: 350.0,
+                    y: 340.0,
                     status: Sound::BassDrum,
-                    effect: effect,
                 };
                 // push to vec
                 self.fonts.push(effect_font);
@@ -40,13 +38,6 @@ impl EffectFonts {
     }
 
     pub fn render(&mut self, c: &Context, gl: &mut GlGraphics) {
-        // render fonts in vec
-        for font in self.fonts.iter() {
-            Image::new()
-            .draw(font.effect.iter().next().unwrap(),
-                &DrawState::default(),
-                c.transform,
-                gl);
-        }
+
     }
 }

@@ -5,7 +5,7 @@ mod effect_font;
 #[derive(Copy, Clone, Hash, PartialEq, Eq)]
 enum Music {}
 
-#[derive(Copy, Clone, Hash, PartialEq, Eq)]
+#[derive(Copy, Clone, Hash, PartialEq, Eq, Debug )]
 pub enum Sound {
     BassDrum,
     SnareDrum,
@@ -94,6 +94,11 @@ fn main() {
                     println!("I'm Crash Cymbal!");
                     make_sound(Sound::CrashCymbal, "bin/assets/crash_cymbal.mp3");
                 }
+            }
+
+            if let Some(ref args) = e.release_args() {
+                use piston_window::Button::Keyboard;
+                app.clear_effect_font();
             }
         }
     });
