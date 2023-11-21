@@ -48,9 +48,9 @@ impl App {
 
         // Effect Fonts
         // Bass Drum
-        self.effect_don = self.load_effect_image(asset_root, "don.png");
+        self.effect_don = self.load_effect_image(asset_root.clone(), "don.png");
         // Snare Drum
-        self.effect_tan = self.load_effect_image(asset_root, "tan.png");
+        self.effect_tan = self.load_effect_image(asset_root.clone(), "tan.png");
         // Hihat Drum
 
         // High Tom
@@ -62,6 +62,7 @@ impl App {
         // Ride Cymbal
 
         // Crash Cymbal
+
     }
 
     fn load_effect_image(&mut self, root: PathBuf, image_path: &str) -> Option<GlTexture> {
