@@ -26,9 +26,18 @@ impl EffectFonts {
         match sound_type {
             Sound::BassDrum => {
                 let effect_font = EffectFont {
-                    x: 350.0,
+                    x: 360.0,
                     y: 340.0,
                     status: Sound::BassDrum,
+                };
+                // push to vec
+                self.fonts.push(effect_font);
+            },
+            Sound::SnareDrum => {
+                let effect_font = EffectFont {
+                    x: 300.0,
+                    y: 300.0,
+                    status: Sound::SnareDrum,
                 };
                 // push to vec
                 self.fonts.push(effect_font);
@@ -37,7 +46,5 @@ impl EffectFonts {
         }
     }
 
-    pub fn render(&mut self, c: &Context, gl: &mut GlGraphics) {
-
-    }
+    pub fn render(&mut self, c: &Context, gl: &mut GlGraphics) {}
 }

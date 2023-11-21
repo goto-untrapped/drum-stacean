@@ -50,7 +50,6 @@ fn main() {
             // keyboard input
             if let Some(ref args) = e.press_args() {
                 use piston_window::Button::Keyboard;
-                // app.key_press(args);
 
                 // Bass Drum
                 if *args == Keyboard(Key::Space) {
@@ -62,6 +61,7 @@ fn main() {
                 if *args == Keyboard(Key::F) || *args == Keyboard(Key::J) {
                     println!("I'm Snare!");
                     make_sound(Sound::SnareDrum, "bin/assets/snare_drum.mp3");
+                    app.add(&Sound::SnareDrum);
                 }
                 // HiHat Open
                 if *args == Keyboard(Key::D) || *args == Keyboard(Key::K) {
@@ -96,8 +96,7 @@ fn main() {
                 }
             }
 
-            if let Some(ref args) = e.release_args() {
-                use piston_window::Button::Keyboard;
+            if let Some(ref _args) = e.release_args() {
                 app.clear_effect_font();
             }
         }

@@ -7,7 +7,14 @@ use opengl_graphics::{GlGraphics, Texture as GlTexture};
 pub struct App {
     effect_fonts: EffectFonts,
     pic_drum: Option<GlTexture>,
-    effect_don: Option<GlTexture>,
+    effect_don: Option<GlTexture>, // Bass Drum
+    effect_tan: Option<GlTexture>, // Snare Drum
+    effect_tsu: Option<GlTexture>, // Hihat Drum
+    effect_pon: Option<GlTexture>, // High Tom
+    effect_bon: Option<GlTexture>, // Medium Tom
+    effect_poko: Option<GlTexture>, // Fllor Tom
+    effect_tuuun: Option<GlTexture>, // Ride Cymbal
+    effect_shaan: Option<GlTexture>, // Crash Cymbal
 }
 
 impl App {
@@ -16,6 +23,13 @@ impl App {
             effect_fonts: EffectFonts::new(),
             pic_drum: None,
             effect_don: None,
+            effect_tan: None,
+            effect_tsu: None,
+            effect_pon: None,
+            effect_bon: None,
+            effect_poko: None,
+            effect_tuuun: None,
+            effect_shaan: None,
         }
     }
 
@@ -33,9 +47,28 @@ impl App {
         self.pic_drum = Some(GlTexture::from_path(&logo_path, &texture_settings).unwrap());
 
         // Effect Fonts
-        let mut effect_don_path = asset_root.clone();
-        effect_don_path.push(Path::new("don.png"));
-        self.effect_don = Some(GlTexture::from_path(&effect_don_path, &texture_settings).unwrap());
+        // Bass Drum
+        self.effect_don = self.load_effect_image(asset_root, "don.png");
+        // Snare Drum
+        self.effect_tan = self.load_effect_image(asset_root, "tan.png");
+        // Hihat Drum
+
+        // High Tom
+
+        // Medium Tom
+
+        // Fllor Tom
+
+        // Ride Cymbal
+
+        // Crash Cymbal
+    }
+
+    fn load_effect_image(&mut self, root: PathBuf, image_path: &str) -> Option<GlTexture> {
+        let mut effect_path = root.clone();
+        let texture_settings = TextureSettings::new();
+        effect_path.push(Path::new(image_path));
+        Some(GlTexture::from_path(&effect_path, &texture_settings).unwrap())
     }
 
     pub fn render(&mut self, args: &RenderArgs, gl: &mut GlGraphics) {
@@ -53,15 +86,19 @@ impl App {
                     c.trans(0.0, 0.0).transform,
                     gl);
 
-            // draw effect sound
-            self.effect_fonts.render(c, gl);
-
             // render fonts in vec
             for font in self.effect_fonts.fonts.iter_mut() {
                 match font.status {
                     Sound::BassDrum => {
                         Image::new()
                         .draw(self.effect_don.iter().next().unwrap(),
+                            &DrawState::default(),
+                            c.trans(font.x,font.y).transform,
+                            gl);
+                    },
+                    Sound::SnareDrum => {
+                        Image::new()
+                        .draw(self.effect_tan.iter().next().unwrap(),
                             &DrawState::default(),
                             c.trans(font.x,font.y).transform,
                             gl);
@@ -73,19 +110,7 @@ impl App {
 
     }
 
-    pub fn update(&mut self, args: &UpdateArgs) {
-        // delete effect font
-        // self.effect_fonts = EffectFonts::new();
-    }
-
-    pub fn key_press(&mut self, args: &Button) {
-        use piston_window::Button::Keyboard;
-
-        // key Space
-        if *args == Keyboard(Key::Space) {
-            println!("Clicked Space!");
-        }
-    }
+    pub fn update(&mut self, args: &UpdateArgs) {}
 
     pub fn add(&mut self, sound_type: &Sound) {
         self.effect_fonts.add(sound_type);
@@ -93,12 +118,7 @@ impl App {
     }
 
     pub fn clear_effect_font(&mut self) {
-        // clear fonts
-        // self.effect_fonts.fonts.retain(|font| font.status != *sound_type);
-        // if let Some(index) = self.effect_fonts.fonts.iter().position(|font| font.status == *sound_type) {
-        //     self.effect_fonts.fonts.remove(index);
-        // }
-        // println!("{:?}", &self.effect_fonts.fonts);
+        // clear font
         self.effect_fonts = EffectFonts::new();
     }
 
