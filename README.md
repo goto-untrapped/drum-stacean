@@ -11,5 +11,5 @@ Make a drum simulator for study.
 
 
 ### Requirements
-This repojitory depends on external non-Rust libraries SDL2 and SDL2 mixer, please refer belows URLs to install.
+This repojitory depends on external non-Rust libraries SDL2 and SDL2 mixer, please refer below to install.
 - [`rust-sdl2`](https://github.com/AngryLawyer/rust-sdl2#requirements) library README.
