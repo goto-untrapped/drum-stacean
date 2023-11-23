@@ -67,32 +67,38 @@ fn main() {
                 if *args == Keyboard(Key::D) || *args == Keyboard(Key::K) {
                     println!("I'm Hihat!");
                     make_sound(Sound::HiHat, "bin/assets/hi_hat.mp3");
+                    app.add(&Sound::HiHat);
                 }
                 // HiHat Close
                 // High Tom right side one
                 if *args == Keyboard(Key::S) {
                     println!("I'm High Tom!");
                     make_sound(Sound::HighTom, "bin/assets/high_tom.mp3");
+                    app.add(&Sound::HighTom);
                 }
                 // Medium Tom left side one
                 if *args == Keyboard(Key::L) {
                     println!("I'm Medium Tom!");
                     make_sound(Sound::MediumTom, "bin/assets/medium_tom.mp3");
+                    app.add(&Sound::MediumTom);
                 }
                 // Floor Tom
                 if *args == Keyboard(Key::Semicolon) {
                     println!("I'm Floor Tom!");
                     make_sound(Sound::FloorTom, "bin/assets/floor_tom.mp3");
+                    app.add(&Sound::FloorTom);
                 }
                 // Ride Cymbal
                 if *args == Keyboard(Key::Unknown) {
                     println!("I'm Ride Cymbal!");
                     make_sound(Sound::RideCymbal, "bin/assets/ride_cymbal.mp3");
+                    app.add(&Sound::RideCymbal);
                 }
                 // Crash Cymbal left up side one
                 if *args == Keyboard(Key::A) {
                     println!("I'm Crash Cymbal!");
                     make_sound(Sound::CrashCymbal, "bin/assets/crash_cymbal.mp3");
+                    app.add(&Sound::CrashCymbal);
                 }
             }
 

@@ -26,8 +26,8 @@ impl EffectFonts {
         match sound_type {
             Sound::BassDrum => {
                 let effect_font = EffectFont {
-                    x: 360.0,
-                    y: 340.0,
+                    x: 370.0,
+                    y: 350.0,
                     status: Sound::BassDrum,
                 };
                 // push to vec
@@ -35,14 +35,68 @@ impl EffectFonts {
             },
             Sound::SnareDrum => {
                 let effect_font = EffectFont {
-                    x: 300.0,
-                    y: 300.0,
+                    x: 210.0,
+                    y: 380.0,
                     status: Sound::SnareDrum,
                 };
                 // push to vec
                 self.fonts.push(effect_font);
             },
-            _ => (),
+            Sound::HiHat => {
+                let effect_font = EffectFont {
+                    x: 80.0,
+                    y: 200.0,
+                    status: Sound::HiHat,
+                };
+                // push to vec
+                self.fonts.push(effect_font);
+            },
+            Sound::FloorTom => {
+                let effect_font = EffectFont {
+                    x: 600.0,
+                    y: 230.0,
+                    status: Sound::FloorTom,
+                };
+                // push to vec
+                self.fonts.push(effect_font);
+            },
+            Sound::HighTom => {
+                let effect_font = EffectFont {
+                    x: 180.0,
+                    y: 150.0,
+                    status: Sound::HighTom,
+                };
+                // push to vec
+                self.fonts.push(effect_font);
+            },
+            Sound::MediumTom => {
+                let effect_font = EffectFont {
+                    x: 560.0,
+                    y: 150.0,
+                    status: Sound::MediumTom,
+                };
+                // push to vec
+                self.fonts.push(effect_font);
+            },
+            Sound::RideCymbal => {
+                let effect_font = EffectFont {
+                    x: 600.0,
+                    y: 30.0,
+                    status: Sound::RideCymbal,
+                };
+                // push to vec
+                self.fonts.push(effect_font);
+            },
+            Sound::CrashCymbal => {
+                let effect_font = EffectFont {
+                    x: 50.0,
+                    y: 100.0,
+                    status: Sound::CrashCymbal,
+                };
+                // push to vec
+                self.fonts.push(effect_font);
+            },
+            
         }
     }
 

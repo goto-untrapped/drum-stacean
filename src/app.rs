@@ -52,19 +52,20 @@ impl App {
         // Snare Drum
         self.effect_tan = self.load_effect_image(asset_root.clone(), "tan.png");
         // Hihat Drum
-
+        self.effect_tsu = self.load_effect_image(asset_root.clone(), "tsu.png");
         // High Tom
-
+        self.effect_pon = self.load_effect_image(asset_root.clone(), "pon.png");
         // Medium Tom
-
-        // Fllor Tom
-
+        self.effect_bon = self.load_effect_image(asset_root.clone(), "bon.png");
+        // Floor Tom
+        self.effect_poko = self.load_effect_image(asset_root.clone(), "poko.png");
         // Ride Cymbal
-
+        self.effect_shaan = self.load_effect_image(asset_root.clone(), "shaan.png");
         // Crash Cymbal
-
+        self.effect_tuuun = self.load_effect_image(asset_root.clone(), "tuuun.png");
     }
 
+    // load effect image
     fn load_effect_image(&mut self, root: PathBuf, image_path: &str) -> Option<GlTexture> {
         let mut effect_path = root.clone();
         let texture_settings = TextureSettings::new();
@@ -104,7 +105,48 @@ impl App {
                             c.trans(font.x,font.y).transform,
                             gl);
                     },
-                    _ => {}
+                    Sound::HiHat => {
+                        Image::new()
+                        .draw(self.effect_tsu.iter().next().unwrap(),
+                            &DrawState::default(),
+                            c.trans(font.x,font.y).transform,
+                            gl);
+                    },
+                    Sound::HighTom => {
+                        Image::new()
+                        .draw(self.effect_pon.iter().next().unwrap(),
+                        &DrawState::default(),
+                        c.trans(font.x,font.y).transform,
+                        gl);
+                    },
+                    Sound::MediumTom => {
+                        Image::new()
+                        .draw(self.effect_bon.iter().next().unwrap(),
+                        &DrawState::default(),
+                        c.trans(font.x,font.y).transform,
+                        gl);
+                    },
+                    Sound::FloorTom => {
+                        Image::new()
+                        .draw(self.effect_poko.iter().next().unwrap(),
+                            &DrawState::default(),
+                            c.trans(font.x,font.y).transform,
+                            gl);
+                    },
+                    Sound::RideCymbal => {
+                        Image::new()
+                        .draw(self.effect_tuuun.iter().next().unwrap(),
+                            &DrawState::default(),
+                            c.trans(font.x,font.y).transform,
+                            gl);
+                    },
+                    Sound::CrashCymbal => {
+                        Image::new()
+                        .draw(self.effect_shaan.iter().next().unwrap(),
+                            &DrawState::default(),
+                            c.trans(font.x,font.y).transform,
+                            gl);
+                    },
                 }
             }
         });
